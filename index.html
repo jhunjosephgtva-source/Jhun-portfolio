@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jhun Joseph Gonzales | Client Service Supervisor & AI Automation Specialist</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #030712;
+      color: #f3f4f6;
+    }
+    .font-inter { font-family: 'Inter', sans-serif; }
+    .bg-grid {
+      background-size: 40px 40px;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glass-card {
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .tag {
+      background: rgba(96, 165, 250, 0.1);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+      color: #93c5fd;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+    .tag-purple {
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      color: #c4b5fd;
+    }
+    .tag-green {
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      color: #6ee7b7;
+    }
+    .nav-link {
+      color: #9ca3af;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: #f3f4f6; }
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #60a5fa;
+    }
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #60a5fa, #a855f7);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+    .timeline-line {
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(96,165,250,0.4), transparent);
+      flex-shrink: 0;
+      margin-left: 4px;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float-slow { animation: float-slow 10s ease-in-out infinite; }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fade-up 0.7s ease both; }
+    .fade-up-2 { animation: fade-up 0.7s 0.15s ease both; }
+    .fade-up-3 { animation: fade-up 0.7s 0.3s ease both; }
+    
+    .skill-pill {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      color: #d1d5db;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .skill-pill:hover {
+      border-color: rgba(96,165,250,0.3);
+      background: rgba(96,165,250,0.07);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #7c3aed);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 12px 28px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-outline {
+      color: #93c5fd;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 11px 28px;
+      border-radius: 10px;
+      border: 1px solid rgba(96,165,250,0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+    .btn-outline:hover { border-color: #60a5fa; background: rgba(96,165,250,0.07); }
+    a { text-decoration: none; }
+
+    /* Futuristic Floating Glow Animation */
+    .icon-container {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .active-glow {
+      box-shadow: 0 0 35px rgba(96, 165, 250, 0.95), 0 0 15px rgba(168, 85, 247, 0.95);
+      border-color: rgba(147, 197, 253, 0.95) !important;
+      transform: scale(1.22) !important;
+      background: rgba(168, 85, 247, 0.4) !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 animate-fade-in" style="background:rgba(3,7,18,0.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <span class="gradient-text font-bold text-lg tracking-tight">JJG</span>
+    
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#about"      class="nav-link">About</a>
+      <a href="#skills"     class="nav-link">Skills</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#projects"   class="nav-link">Projects</a>
+      <a href="#contact"    class="nav-link">Contact</a>
+    </div>
+    
+    <!-- Mobile Hamburger Toggle -->
+    <button id="hamburger-btn" class="md:hidden text-gray-400 hover:text-white transition-colors" aria-label="Toggle Menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"/>
+      </svg>
+    </button>
+    
+    <a href="mailto:jhunjosephgtva@gmail.com" class="hidden md:inline-flex btn-primary" style="padding:8px 20px;font-size:0.82rem;">Hire Me</a>
+  </div>
+  
+  <!-- Mobile Menu Drawer -->
+  <div id="mobile-menu" class="hidden absolute top-16 left-0 right-0 bg-[#030712] border-b border-white/10 z-40 px-6 py-5 flex flex-col gap-4 animate-fade-in" style="backdrop-filter:blur(16px);">
+    <a href="#about"      class="nav-link text-lg py-1">About</a>
+    <a href="#skills"     class="nav-link text-lg py-1">Skills</a>
+    <a href="#experience" class="nav-link text-lg py-1">Experience</a>
+    <a href="#projects"   class="nav-link text-lg py-1">Projects</a>
+    <a href="#contact"    class="nav-link text-lg py-1 font-semibold text-blue-400">Contact</a>
+    <a href="mailto:jhunjosephgtva@gmail.com" class="btn-primary w-full text-center justify-center mt-2">Hire Me</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="about" class="relative min-h-screen flex items-center bg-grid pt-16 overflow-hidden">
+  <div style="position:absolute;top:15%;left:10%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,0.12),transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:20%;right:8%;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.1),transparent 70%);pointer-events:none;"></div>
+  
+  <div class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center w-full relative z-10">
+    <!-- Left Column: Bio & Info -->
+    <div>
+      <p class="section-eyebrow mb-4 fade-up">Available for new clients</p>
+      <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-5 fade-up-2" style="letter-spacing:-0.02em;">
+        Jhun Joseph<br/><span class="gradient-text">Gonzales</span>
+      </h1>
+      <p class="text-xl text-gray-400 font-medium mb-2 fade-up-2">Client Service Supervisor · AI Automation Specialist</p>
+      <p class="text-gray-500 text-base leading-relaxed mb-8 fade-up-2" style="max-width:480px;">
+        Based in Balanga, Bataan, Philippines — I bridge virtual assistant operations, workflow automation, and AI-driven content creation to help small businesses run smarter, not harder.
+      </p>
+      <div class="flex flex-wrap gap-3 mb-10 fade-up-3">
+        <span class="tag">BPO / VA Operations</span>
+        <span class="tag tag-purple">n8n · Zapier · Make</span>
+        <span class="tag tag-green">AI Video & UGC</span>
+      </div>
+      <div class="flex flex-wrap gap-4 fade-up-3">
+        <a href="mailto:jhunjosephgtva@gmail.com" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          Get in Touch
+        </a>
+        <a href="tel:+639060488844" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+          +63 906 048 8844
+        </a>
+      </div>
+    </div>
+    
+    <!-- Right Column: Interactive Futuristic Canvas Portfolio Visualizer -->
+    <div class="flex justify-center items-center relative">
+      <div class="relative w-full aspect-square max-w-[450px] flex items-center justify-center p-6 bg-[#030712]/10 rounded-full border border-white/5 shadow-[inset_0_0_50px_rgba(255,255,255,0.02)]">
+        
+        <!-- Central Portrait -->
+        <div class="absolute bottom-6 w-[240px] h-[310px] sm:w-[280px] sm:h-[360px] z-10 flex items-end justify-center select-none animate-float-slow" style="-webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%); mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%);">
+          <img 
+            src="https://lh3.googleusercontent.com/d/1tdvY-fkjzEFb0bguLCWfgTfWW9axgqN7" 
+            alt="Jhun Joseph Gonzales" 
+            class="w-full h-full object-contain pointer-events-none drop-shadow-[0_15px_45px_rgba(168,85,247,0.3)] filter contrast-[1.03] brightness-[1.02]"
+          >
+        </div>
+
+        <!-- Connection Path SVG Canvas -->
+        <svg id="digitalNetworkSvg" class="absolute inset-0 w-full h-full z-0 pointer-events-none" viewBox="0 0 450 450">
+          <!-- Background Orbit Track -->
+          <circle cx="225" cy="225" r="170" fill="none" stroke="rgba(168, 85, 247, 0.08)" stroke-width="1.5" stroke-dasharray="6 8" />
+          
+          <!-- Moving Electric Line -->
+          <path id="electricPath" d="" fill="none" stroke="url(#electricGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.9" />
+          <path id="electricPathTrace" d="" fill="none" stroke="rgba(147, 197, 253, 0.1)" stroke-width="1.5" />
+          
+          <!-- Gradient Definition for traveling neon electric pulses -->
+          <defs>
+            <linearGradient id="electricGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#3b82f6" stop-opacity="0" />
+              <stop offset="50%" stop-color="#60a5fa" stop-opacity="1" />
+              <stop offset="85%" stop-color="#c084fc" stop-opacity="1" />
+              <stop offset="100%" stop-color="#a855f7" stop-opacity="1" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <!-- Dynamic Particle Trail Sandbox (Drifting Star Particles) -->
+        <div id="particleSandbox" class="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-full"></div>
+
+        <!-- Circular Layout of Floating Interactive Icons -->
+        <!-- Cloud Top-0 -->
+        <div id="icon-cloud" class="icon-container absolute z-20 w-11 h-11 bg-purple-500/10 backdrop-blur-md rounded-xl border border-purple-500/25 flex items-center justify-center shadow-[0_0_12px_rgba(168,85,247,0.15)] cursor-pointer" style="top: 5%; left: 50%; transform: translate(-50%, -50%);">
+          <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+          </svg>
+        </div>
+
+        <!-- Zap Top-Right-1 -->
+        <div id="icon-zap" class="icon-container absolute z-20 w-11 h-11 bg-blue-500/10 backdrop-blur-md rounded-xl border border-blue-500/25 flex items-center justify-center shadow-[0_0_12px_rgba(96,165,250,0.15)] cursor-pointer" style="top: 18%; left: 82%; transform: translate(-50%, -50%);">
+          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+
+        <!-- GitBranch Right-2 -->
+        <div id="icon-gitbranch" class="icon-container absolute z-20 w-11 h-11 bg-purple-500/10 backdrop-blur-md rounded-xl border border-purple-500/25 flex items-center justify-center shadow-[0_0_12px_rgba(168,85,247,0.15)] cursor-pointer" style="top: 50%; left: 95%; transform: translate(-50%, -50%);">
+          <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 10a3 3 0 11-6 0 3 3 0 016 0zm-6 0v7a3 3 0 11-6 0v-7M6 6a3 3 0 114 0" />
+          </svg>
+        </div>
+
+        <!-- Target Bottom-Right-3 -->
+        <div id="icon-target" class="icon-container absolute z-20 w-11 h-11 bg-blue-500/10 backdrop-blur-md rounded-xl border border-blue-500/25 flex items-center justify-center shadow-[0_0_12px_rgba(96,165,250,0.15)] cursor-pointer" style="top: 82%; left: 82%; transform: translate(-50%, -50%);">
+          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="6" />
+            <circle cx="12" cy="12" r="2" />
+          </svg>
+        </div>
+
+        <!-- Sparkles Bottom-4 -->
+        <div id="icon-sparkles" class="icon-container absolute z-20 w-11 h-11 bg-purple-500/10 backdrop-blur-md rounded-xl border border-purple-500/25 flex items-center justify-center shadow-[0_0_12px_rgba(168,85,247,0.15)] cursor-pointer" style="top: 95%; left: 50%; transform: translate(-50%, -50%);">
+          <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+          </svg>
+        </div>
+
+        <!-- Database Bottom-Left-5 -->
+        <div id="icon-database" class="icon-container absolute z-20 w-11 h-11 bg-blue-500/10 backdrop-blur-md rounded-xl border border-blue-500/25 flex items-center justify-center shadow-[0_0_12px_rgba(96,165,250,0.15)] cursor-pointer" style="top: 82%; left: 18%; transform: translate(-50%, -50%);">
+          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+          </svg>
+        </div>
+
+        <!-- Bot Left-6 -->
+        <div id="icon-bot" class="icon-container absolute z-20 w-11 h-11 bg-purple-500/10 backdrop-blur-md rounded-xl border border-purple-500/25 flex items-center justify-center shadow-[0_0_12px_rgba(168,85,247,0.15)] cursor-pointer" style="top: 50%; left: 5%; transform: translate(-50%, -50%);">
+          <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="11" width="18" height="10" rx="2" />
+            <circle cx="12" cy="5" r="2" />
+            <path stroke-linecap="round" d="M12 7v4M8 15h.01M16 15h.01" />
+          </svg>
+        </div>
+
+        <!-- Brain Top-Left-7 -->
+        <div id="icon-brain" class="icon-container absolute z-20 w-11 h-11 bg-blue-500/10 backdrop-blur-md rounded-xl border border-blue-500/25 flex items-center justify-center shadow-[0_0_12px_rgba(96,165,250,0.15)] cursor-pointer" style="top: 18%; left: 18%; transform: translate(-50%, -50%);">
+          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="section-eyebrow mb-3">What I bring</p>
+    <h2 class="text-4xl font-extrabold mb-4" style="letter-spacing:-0.02em;">Core <span class="gradient-text">Skills</span></h2>
+    <p class="text-gray-500 text-base mb-14" style="max-width:500px;">A toolkit built across BPO, freelance, and startup environments — practical, no-code-first, and AI-integrated.</p>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="glass-card rounded-2xl p-6 hover:border-blue-500/30 transition-all duration-300">
+        <div style="width:44px;height:44px;background:rgba(96,165,250,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="font-bold text-base mb-3">Client & VA Management</h3>
+        <div class="flex flex-col gap-2">
+          <div class="skill-pill">👥 VA Team Supervision</div>
+          <div class="skill-pill">📋 Recruitment & Onboarding</div>
+          <div class="skill-pill">📞 Zoom Client Meetings</div>
+          <div class="skill-pill">🏥 Healthcare Tools (EVV, Worldview)</div>
+          <div class="skill-pill">📱 Meta Business Suite</div>
+          <div class="skill-pill">🎙 Streamyard Broadcasts</div>
+        </div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 hover:border-purple-500/30 transition-all duration-300">
+        <div style="width:44px;height:44px;background:rgba(168,85,247,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3 class="font-bold text-base mb-3">Automation & CRM</h3>
+        <div class="flex flex-col gap-2">
+          <div class="skill-pill">⚡ n8n · Zapier · Make.com</div>
+          <div class="skill-pill">🗃 HubSpot · Airtable</div>
+          <div class="skill-pill">🔗 API & Webhook Integrations</div>
+          <div class="skill-pill">🤖 AI Chatbots & Voice Schedulers</div>
+          <div class="skill-pill">🌐 Google Workspace Suite</div>
+          <div class="skill-pill">📊 Lead Capture Workflows</div>
+        </div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 hover:border-emerald-500/30 transition-all duration-300">
+        <div style="width:44px;height:44px;background:rgba(52,211,153,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <h3 class="font-bold text-base mb-3">AI Content & Web</h3>
+        <div class="flex flex-col gap-2">
+          <div class="skill-pill">🎬 Freepik/Magnific AI Video</div>
+          <div class="skill-pill">✂️ CapCut Editing</div>
+          <div class="skill-pill">🖼 Adobe Photoshop & Premiere</div>
+          <div class="skill-pill">🤖 Claude AI App Building</div>
+          <div class="skill-pill">🌐 Lovable · Google AI Studio</div>
+          <div class="skill-pill">📈 UGC-Style Content</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="py-24" style="background:rgba(17,24,39,0.3);">
+  <div class="max-w-4xl mx-auto px-6">
+    <p class="section-eyebrow mb-3">Career timeline</p>
+    <h2 class="text-4xl font-extrabold mb-14" style="letter-spacing:-0.02em;">Professional <span class="gradient-text">Experience</span></h2>
+    <div class="space-y-10">
+      <div class="flex gap-5">
+        <div class="flex flex-col items-center pt-1"><div class="timeline-dot"></div><div class="timeline-line flex-1 mt-2"></div></div>
+        <div class="glass-card rounded-2xl p-6 flex-1 hover:border-white/20 transition-all duration-300">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div><h3 class="font-bold text-lg">Client Service Supervisor</h3><p class="text-gray-400 text-sm">Exquisite Virtual Solutions LLC</p></div>
+            <span class="tag tag-green">Mar 2026 – Present</span>
+          </div>
+          <ul class="text-gray-400 text-sm space-y-2 leading-relaxed">
+            <li>• Manage client communications and requests across healthcare, real estate, cleaning services, and non-profit verticals</li>
+            <li>• Supervise and support VA team performance across admin, social media, medical, and real estate services</li>
+            <li>• Recruit, onboard, and train new virtual assistants; conduct Zoom client meetings and reporting</li>
+            <li>• Operate healthcare tools (EVV, Worldview, HIPAA-aware) and phone system (Quo)</li>
+            <li>• Manage social media via Meta Business Suite; host live stream broadcasts using Streamyard</li>
+            <li>• Build client-facing apps using Claude AI to streamline business operations</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex gap-5">
+        <div class="flex flex-col items-center pt-1"><div class="timeline-dot"></div><div class="timeline-line flex-1 mt-2"></div></div>
+        <div class="glass-card rounded-2xl p-6 flex-1 hover:border-white/20 transition-all duration-300">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div><h3 class="font-bold text-lg">Video AI Automation Specialist</h3><p class="text-gray-400 text-sm">Freelance</p></div>
+            <span class="tag tag-green">Mar 2026 – Present</span>
+          </div>
+          <ul class="text-gray-400 text-sm space-y-2 leading-relaxed">
+            <li>• Create UGC-style AI videos using Freepik (Magnific) with advanced prompt engineering</li>
+            <li>• Work across multiple AI models based on video output requirements</li>
+            <li>• Edit and finalize content using CapCut for platform-ready delivery on TikTok and social media</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex gap-5">
+        <div class="flex flex-col items-center pt-1"><div class="timeline-dot"></div><div class="timeline-line flex-1 mt-2"></div></div>
+        <div class="glass-card rounded-2xl p-6 flex-1 hover:border-white/20 transition-all duration-300">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div><h3 class="font-bold text-lg">Freelance Automation & CRM Specialist</h3><p class="text-gray-400 text-sm">Self-Employed</p></div>
+            <span class="tag">Ongoing</span>
+          </div>
+          <ul class="text-gray-400 text-sm space-y-2 leading-relaxed">
+            <li>• Built automations using Zapier, Make.com, and n8n for lead capture, follow-ups, and CRM workflows</li>
+            <li>• Integrated HubSpot and Airtable for pipeline and task management</li>
+            <li>• Developed AI chatbots and AI Voice Scheduler using n8n</li>
+            <li>• Created websites and funnels using Lovable and Google AI Studio</li>
+            <li>• Set up API/webhook integrations and data deduplication workflows</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex gap-5">
+        <div class="flex flex-col items-center pt-1"><div class="timeline-dot"></div><div class="timeline-line flex-1 mt-2"></div></div>
+        <div class="glass-card rounded-2xl p-6 flex-1 hover:border-white/20 transition-all duration-300">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div><h3 class="font-bold text-lg">Outbound Cold Caller</h3><p class="text-gray-400 text-sm">Freelance (WFH)</p></div>
+            <span class="tag">Nov 2024 – Dec 2025</span>
+          </div>
+          <ul class="text-gray-400 text-sm space-y-2 leading-relaxed">
+            <li>• High-volume outbound calls across debt relief, insurance, education, utilities, and SSDI campaigns</li>
+            <li>• Tracked leads and managed sales pipeline using CRM tools</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex gap-5">
+        <div class="flex flex-col items-center pt-1"><div class="timeline-dot"></div><div class="timeline-line flex-1 mt-2"></div></div>
+        <div class="glass-card rounded-2xl p-6 flex-1 hover:border-white/20 transition-all duration-300">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div><h3 class="font-bold text-lg">Technical & Sales Representative</h3><p class="text-gray-400 text-sm">Asurion (Techlog Center PH)</p></div>
+            <span class="tag">Jul 2023 – Sep 2024</span>
+          </div>
+          <ul class="text-gray-400 text-sm space-y-2 leading-relaxed">
+            <li>• Provided technical support and troubleshooting for customers</li>
+            <li>• Identified upselling opportunities and maintained CRM records</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex gap-5">
+        <div class="flex flex-col items-center pt-1"><div class="timeline-dot"></div><div class="timeline-line flex-1 mt-2"></div></div>
+        <div class="glass-card rounded-2xl p-6 flex-1 hover:border-white/20 transition-all duration-300">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div><h3 class="font-bold text-lg">Freelance Videographer / Video Editor</h3><p class="text-gray-400 text-sm">Self-Employed</p></div>
+            <span class="tag">Jan 2019 – Present</span>
+          </div>
+          <ul class="text-gray-400 text-sm space-y-2 leading-relaxed">
+            <li>• Produced and edited photo/video content using Adobe Lightroom and Premiere Pro</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex gap-5">
+        <div class="flex flex-col items-center pt-1"><div class="timeline-dot"></div></div>
+        <div class="glass-card rounded-2xl p-6 flex-1 hover:border-white/20 transition-all duration-300">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div><h3 class="font-bold text-lg">Customer Service & Technical Support</h3><p class="text-gray-400 text-sm">Genpact · West Contact Services · Alorica · Teleperformance</p></div>
+            <span class="tag">Dec 2012 – Oct 2018</span>
+          </div>
+          <ul class="text-gray-400 text-sm space-y-2 leading-relaxed">
+            <li>• Delivered customer service and technical support for banking and cable internet accounts across multiple BPO companies</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="section-eyebrow mb-3">What I've built</p>
+    <h2 class="text-4xl font-extrabold mb-14" style="letter-spacing:-0.02em;">Featured <span class="gradient-text">Projects</span></h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="glass-card rounded-2xl p-6 flex flex-col gap-4 hover:border-blue-500/30 transition-all duration-300" style="border:1px solid rgba(255,255,255,0.08);">
+        <div style="font-size:2rem;">🏨</div>
+        <h3 class="font-bold text-base">Hotel Management App</h3>
+        <p class="text-gray-400 text-sm leading-relaxed flex-1">Custom hotel management application built in Google AI Studio. Covers room status tracking, booking management, pricing configuration, and staff account management.</p>
+        <div class="flex flex-wrap gap-2 mt-auto"><span class="tag">Google AI Studio</span><span class="tag tag-purple">Hotel Mgmt</span></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 flex flex-col gap-4 hover:border-purple-500/30 transition-all duration-300" style="border:1px solid rgba(255,255,255,0.08);">
+        <div style="font-size:2rem;">📋</div>
+        <h3 class="font-bold text-base">VA Script & SOP Reference App</h3>
+        <p class="text-gray-400 text-sm leading-relaxed flex-1">Fully functional web app built with Claude AI and deployed as a permanent business tool — centralizes VA scripts, SOPs, and operational references for virtual assistant teams.</p>
+        <div class="flex flex-wrap gap-2 mt-auto"><span class="tag">Claude AI</span><span class="tag tag-green">Web App</span></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 flex flex-col gap-4 hover:border-green-500/30 transition-all duration-300" style="border:1px solid rgba(255,255,255,0.08);">
+        <div style="font-size:2rem;">🤖</div>
+        <h3 class="font-bold text-base">AI Voice Scheduler (n8n)</h3>
+        <p class="text-gray-400 text-sm leading-relaxed flex-1">Automated voice-based scheduling system built with n8n, integrating AI to handle appointment booking flows for small businesses.</p>
+        <div class="flex flex-wrap gap-2 mt-auto"><span class="tag">n8n</span><span class="tag tag-purple">AI Automation</span></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 flex flex-col gap-4 hover:border-blue-500/30 transition-all duration-300" style="border:1px solid rgba(255,255,255,0.08);">
+        <div style="font-size:2rem;">⚡</div>
+        <h3 class="font-bold text-base">CRM & Lead Capture Workflows</h3>
+        <p class="text-gray-400 text-sm leading-relaxed flex-1">Multi-client automation pipelines using Zapier, Make.com, and n8n — covering lead capture, follow-up sequences, CRM sync, and deduplication.</p>
+        <div class="flex flex-wrap gap-2 mt-auto"><span class="tag">Zapier</span><span class="tag">Make.com</span><span class="tag tag-purple">HubSpot</span></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 flex flex-col gap-4 hover:border-pink-500/30 transition-all duration-300" style="border:1px solid rgba(255,255,255,0.08);">
+        <div style="font-size:2rem;">🌐</div>
+        <h3 class="font-bold text-base">Healthcare Nonprofit Website</h3>
+        <p class="text-gray-400 text-sm leading-relaxed flex-1">Built and deployed a full-featured website for a healthcare nonprofit — structured as a standalone HTML file for easy hosting, preserving all branding and content.</p>
+        <div class="flex flex-wrap gap-2 mt-auto"><span class="tag tag-green">HTML/CSS</span><span class="tag">Web Deployment</span></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 flex flex-col gap-4 hover:border-yellow-500/30 transition-all duration-300" style="border:1px solid rgba(255,255,255,0.08);">
+        <div style="font-size:2rem;">🎬</div>
+        <h3 class="font-bold text-base">AI UGC Video Production</h3>
+        <p class="text-gray-400 text-sm leading-relaxed flex-1">End-to-end UGC-style video content using Freepik/Magnific AI image generation, multi-model prompting, and CapCut editing for TikTok delivery.</p>
+        <div class="flex flex-wrap gap-2 mt-auto"><span class="tag">Freepik/Magnific</span><span class="tag tag-purple">CapCut</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-24" style="background:rgba(17,24,39,0.4);">
+  <div class="max-w-3xl mx-auto px-6 text-center">
+    <p class="section-eyebrow mb-3">Let's work together</p>
+    <h2 class="text-4xl font-extrabold mb-5" style="letter-spacing:-0.02em;">Get in <span class="gradient-text">Touch</span></h2>
+    <p class="text-gray-400 text-base leading-relaxed mb-12" style="max-width:460px;margin-left:auto;margin-right:auto;">
+      Whether you need a client service supervisor, an automation specialist, or an AI content creator — I'm open to discussing how I can help your business.
+    </p>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+      <!-- Email Card -->
+      <a href="mailto:jhunjosephgtva@gmail.com" class="glass-card rounded-2xl p-6 flex flex-col items-center gap-3 hover:border-blue-500/30 transition-all duration-300" style="border:1px solid rgba(255,255,255,0.08);">
+        <div style="width:44px;height:44px;background:rgba(96,165,250,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        </div>
+        <div><p class="text-xs text-gray-500 mb-1">Email</p><p class="text-sm font-medium text-gray-200">jhunjosephgtva@gmail.com</p></div>
+      </a>
+      
+      <!-- Phone Card -->
+      <a href="tel:+639060488844" class="glass-card rounded-2xl p-6 flex flex-col items-center gap-3 hover:border-purple-500/30 transition-all duration-300" style="border:1px solid rgba(255,255,255,0.08);">
+        <div style="width:44px;height:44px;background:rgba(168,85,247,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+        </div>
+        <div><p class="text-xs text-gray-500 mb-1">Phone / WhatsApp</p><p class="text-sm font-medium text-gray-200">+63 906 048 8844</p></div>
+      </a>
+      
+      <!-- Location Card -->
+      <div class="glass-card rounded-2xl p-6 flex flex-col items-center gap-3" style="border:1px solid rgba(255,255,255,0.08);">
+        <div style="width:44px;height:44px;background:rgba(52,211,153,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div><p class="text-xs text-gray-500 mb-1">Location</p><p class="text-sm font-medium text-gray-200">Balanga, Bataan 🇵🇭</p></div>
+      </div>
+    </div>
+    
+    <!-- Social Network Hub Links -->
+    <div class="flex items-center justify-center gap-5 mb-12">
+      <!-- LinkedIn -->
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full glass-card border border-white/5 hover:border-blue-500/40 hover:bg-blue-500/10 flex items-center justify-center transition-all duration-300 group">
+        <svg class="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+      </a>
+      <!-- Facebook -->
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full glass-card border border-white/5 hover:border-blue-600/40 hover:bg-blue-600/10 flex items-center justify-center transition-all duration-300 group">
+        <svg class="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.54-.93 8-4.96 8-9.75z"/>
+        </svg>
+      </a>
+    </div>
+
+    <a href="mailto:jhunjosephgtva@gmail.com" class="btn-primary" style="font-size:1rem;padding:14px 36px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+      Send me an email
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:center;">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <span class="gradient-text font-bold text-lg">JJG</span>
+    <p class="text-gray-600 text-sm">© 2026 Jhun Joseph Gonzales · Balanga, Bataan, Philippines</p>
+    <p class="text-gray-600 text-sm">jhunjosephgtva@gmail.com</p>
+  </div>
+</footer>
+
+<!-- Interactive UI System Scripts (Mobile Menu + Electric Line Routing Canvas Animation) -->
+<script>
+  // 1. MOBILE MENU HAMBURGER CONTROLLER
+  const btn = document.getElementById('hamburger-btn');
+  const menu = document.getElementById('mobile-menu');
+  const icon = document.getElementById('hamburger-icon');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+    // Toggle hamburger icon between open/close
+    if (menu.classList.contains('hidden')) {
+      icon.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+    } else {
+      icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+    }
+  });
+
+  // Close menu when clicking navigation items
+  const menuLinks = menu.querySelectorAll('a');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menu.classList.add('hidden');
+      icon.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+    });
+  });
+
+
+  // 2. NEON ELECTRIC NETWORK SYSTEM ROUTING CONTROLLER
+  const iconsList = [
+    { id: 'icon-cloud', x: 225, y: 22.5 },
+    { id: 'icon-zap', x: 369, y: 81 },
+    { id: 'icon-gitbranch', x: 427.5, y: 225 },
+    { id: 'icon-target', x: 369, y: 369 },
+    { id: 'icon-sparkles', x: 225, y: 427.5 },
+    { id: 'icon-database', x: 81, y: 369 },
+    { id: 'icon-bot', x: 22.5, y: 225 },
+    { id: 'icon-brain', x: 81, y: 81 }
+  ];
+
+  const electricPath = document.getElementById('electricPath');
+  const electricPathTrace = document.getElementById('electricPathTrace');
+  const sandbox = document.getElementById('particleSandbox');
+
+  // Build the complete smooth routing circular path around portrait
+  function generateRoutingPath() {
+    let d = `M ${iconsList[0].x} ${iconsList[0].y}`;
+    for (let i = 1; i <= iconsList.length; i++) {
+      const current = iconsList[i % iconsList.length];
+      const prev = iconsList[(i - 1) % iconsList.length];
+      
+      // Calculate cubic Bézier control points to curl beautifully around central silhouette
+      const cx = 225;
+      const cy = 225;
+      
+      // Control points pull slightly outwards away from center (225, 225) to avoid overlap
+      const r_offset = 1.08;
+      const cp1_x = prev.x + (current.x - prev.x) * 0.25;
+      const cp1_y = prev.y + (current.y - prev.y) * 0.25;
+      const cp2_x = prev.x + (current.x - prev.x) * 0.75;
+      const cp2_y = prev.y + (current.y - prev.y) * 0.75;
+
+      d += ` C ${cp1_x} ${cp1_y}, ${cp2_x} ${cp2_y}, ${current.x} ${current.y}`;
+    }
+    return d;
+  }
+
+  const generatedD = generateRoutingPath();
+  electricPath.setAttribute('d', generatedD);
+  electricPathTrace.setAttribute('d', generatedD);
+
+  // Trigger continuous animation of traveling neon line via path tracer
+  const totalLength = electricPath.getTotalLength();
+  electricPath.style.strokeDasharray = `${totalLength / 4} ${totalLength * 3 / 4}`;
+  electricPath.style.strokeDashoffset = totalLength;
+
+  let animationFrameId;
+  let offset = totalLength;
+  let lastIconIndex = -1;
+
+  function animateNetwork() {
+    offset -= 2.6; // Speed adjustments for a smooth cinematic travel
+    if (offset < 0) offset = totalLength;
+    
+    electricPath.style.strokeDashoffset = offset;
+    
+    // Detect which node/icon the pulse is closest to and trigger glow pulse
+    const progressPercent = 1 - (offset / totalLength);
+    const normalizedPercent = (progressPercent + 0.05) % 1; // Align trigger point slightly ahead of visual peak
+    const activeNodeIndex = Math.floor(normalizedPercent * iconsList.length);
+    
+    if (activeNodeIndex !== lastIconIndex) {
+      const activeNode = iconsList[activeNodeIndex];
+      const el = document.getElementById(activeNode.id);
+      
+      if (el) {
+        el.classList.add('active-glow');
+        
+        // Spawn particles burst when active
+        createSparkleBurst(activeNode.x, activeNode.y);
+        
+        // Remove high glow smoothly
+        setTimeout(() => {
+          el.classList.remove('active-glow');
+        }, 1200);
+      }
+      lastIconIndex = activeNodeIndex;
+    }
+    
+    // Constant fine drift particles along route
+    if (Math.random() < 0.15) {
+      const activePoint = electricPath.getPointAtLength((1 - (offset / totalLength)) * totalLength);
+      spawnDriftParticle(activePoint.x, activePoint.y);
+    }
+    
+    animationFrameId = requestAnimationFrame(animateNetwork);
+  }
+
+  // Particle Generators (Drifting Stars / Shimmer)
+  function createSparkleBurst(x, y) {
+    for (let i = 0; i < 8; i++) {
+      const p = document.createElement('div');
+      p.className = 'absolute rounded-full pointer-events-none transition-all duration-1000 ease-out';
+      p.style.width = `${Math.random() * 4 + 2}px`;
+      p.style.height = p.style.width;
+      
+      const isPurple = Math.random() < 0.5;
+      p.style.background = isPurple ? '#c084fc' : '#60a5fa';
+      p.style.boxShadow = `0 0 10px ${isPurple ? '#a855f7' : '#3b82f6'}`;
+      
+      p.style.left = `${x}px`;
+      p.style.top = `${y}px`;
+      p.style.opacity = '1';
+      sandbox.appendChild(p);
+
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 45 + 15;
+      const tx = Math.cos(angle) * speed;
+      const ty = Math.sin(angle) * speed;
+
+      requestAnimationFrame(() => {
+        p.style.transform = `translate(${tx}px, ${ty}px) scale(0)`;
+        p.style.opacity = '0';
+      });
+
+      setTimeout(() => p.remove(), 1000);
+    }
+  }
+
+  function spawnDriftParticle(x, y) {
+    const p = document.createElement('div');
+    p.className = 'absolute rounded-full pointer-events-none transition-all duration-1000 ease-out';
+    p.style.width = `${Math.random() * 3 + 1.5}px`;
+    p.style.height = p.style.width;
+    p.style.background = 'rgba(255,255,255,0.7)';
+    p.style.boxShadow = '0 0 8px #60a5fa';
+    p.style.left = `${x}px`;
+    p.style.top = `${y}px`;
+    p.style.opacity = '0.8';
+    
+    sandbox.appendChild(p);
+
+    const ty = (Math.random() - 0.5) * 12;
+    const tx = (Math.random() - 0.5) * 12;
+
+    requestAnimationFrame(() => {
+      p.style.transform = `translate(${tx}px, ${ty}px) scale(0)`;
+      p.style.opacity = '0';
+    });
+
+    setTimeout(() => p.remove(), 1000);
+  }
+
+  // Run network animation loop immediately
+  animateNetwork();
+</script>
+
+</body>
+</html>
