@@ -802,5 +802,174 @@
   animateNetwork();
 </script>
 
+<!-- ===== ASK-JHUN AI CHATBOT ===== -->
+<style>
+  #jj-chat-btn{position:fixed;bottom:24px;right:24px;z-index:9998;width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;font-size:1.6rem;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(59,130,246,.45);transition:transform .2s;}
+  #jj-chat-btn:hover{transform:scale(1.08);}
+  #jj-chat-panel{position:fixed;bottom:96px;right:24px;z-index:9999;width:min(380px,calc(100vw - 32px));height:min(540px,calc(100vh - 130px));display:none;flex-direction:column;border-radius:20px;overflow:hidden;background:rgba(13,18,32,.96);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.6);}
+  #jj-chat-panel.open{display:flex;}
+  .jj-head{padding:14px 18px;background:linear-gradient(135deg,rgba(59,130,246,.25),rgba(139,92,246,.25));border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;}
+  .jj-head .dot{width:9px;height:9px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;flex-shrink:0;}
+  .jj-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;}
+  .jj-msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:.86rem;line-height:1.5;white-space:pre-line;}
+  .jj-msg.bot{background:rgba(255,255,255,.07);color:#d1d5db;border-bottom-left-radius:4px;align-self:flex-start;}
+  .jj-msg.user{background:linear-gradient(135deg,#3b82f6,#6d28d9);color:#fff;border-bottom-right-radius:4px;align-self:flex-end;}
+  .jj-msg a{color:#93c5fd;text-decoration:underline;}
+  .jj-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;}
+  .jj-chip{font-size:.72rem;padding:5px 11px;border-radius:999px;border:1px solid rgba(96,165,250,.4);background:rgba(59,130,246,.12);color:#93c5fd;cursor:pointer;transition:background .15s;}
+  .jj-chip:hover{background:rgba(59,130,246,.3);}
+  .jj-inputrow{display:flex;gap:8px;padding:12px 14px;border-top:1px solid rgba(255,255,255,.08);}
+  .jj-inputrow input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 12px;font-size:.86rem;color:#e5e7eb;outline:none;}
+  .jj-inputrow input:focus{border-color:#3b82f6;}
+  .jj-inputrow button{border:none;border-radius:10px;padding:0 16px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;font-size:1rem;cursor:pointer;}
+  .jj-typing span{display:inline-block;width:6px;height:6px;margin-right:3px;border-radius:50%;background:#9ca3af;animation:jjblink 1.2s infinite;}
+  .jj-typing span:nth-child(2){animation-delay:.2s}.jj-typing span:nth-child(3){animation-delay:.4s}
+  @keyframes jjblink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+</style>
+
+<button id="jj-chat-btn" aria-label="Chat about Jhun">💬</button>
+
+<div id="jj-chat-panel" role="dialog" aria-label="Ask about Jhun chatbot">
+  <div class="jj-head">
+    <div class="dot"></div>
+    <div>
+      <div style="font-weight:700;font-size:.92rem;color:#fff;">Ask about Jhun 🤖</div>
+      <div style="font-size:.7rem;color:#9ca3af;">AI assistant — answers from Jhun's resume</div>
+    </div>
+    <button onclick="jjToggle()" style="margin-left:auto;background:none;border:none;color:#9ca3af;font-size:1.1rem;cursor:pointer;">✕</button>
+  </div>
+  <div class="jj-msgs" id="jj-msgs"></div>
+  <div class="jj-chips" id="jj-chips"></div>
+  <div class="jj-inputrow">
+    <input id="jj-input" type="text" placeholder="Ask me anything about Jhun..." autocomplete="off"/>
+    <button onclick="jjSend()" aria-label="Send">➤</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const EMAIL = 'jhunjosephgtva@gmail.com';
+  const SCHEDULE = "To know more about Jhun, let's set a schedule via Zoom or Google Meet! 📅\nEmail <a href='mailto:" + EMAIL + "?subject=Meeting%20with%20Jhun'>" + EMAIL + "</a> to book a time that works for you.";
+
+  // Knowledge base — source of truth: Jhun's resume.
+  const KB = [
+    { k:['hi','hello','hey','good morning','good afternoon','good evening','greetings','yo','kumusta'],
+      a:"Hi there! 👋 I'm Jhun's AI assistant. Ask me about his skills, work experience, tools, or how to get in touch — everything I know comes straight from his resume." },
+    { k:['who is','who are','about jhun','about him','summary','background','introduce','profile','jhun joseph','gonzales'],
+      a:"Jhun Joseph Gonzales is a versatile professional based in Balanga, Bataan, Philippines. He has experience in client services supervision, AI video content creation, workflow automation, CRM management, and virtual assistant operations. He's skilled at managing teams, handling client communications, building automations, and producing AI-driven video content across multiple tools and platforms." },
+    { k:['where','location','based','live','from','country','philippines','city','address'],
+      a:"Jhun is based in Balanga, Bataan, Philippines 🇵🇭 and works remotely with clients worldwide." },
+    { k:['contact','email','phone','number','reach','get in touch','call him','message'],
+      a:"You can reach Jhun at:\n📧 <a href='mailto:" + EMAIL + "'>" + EMAIL + "</a>\n📱 +63 906 048 8844" },
+    { k:['skill','skills','what can he do','good at','abilities','expertise','strengths','services','offer'],
+      a:"Jhun's core skills include:\n• Client services supervision & VA team management\n• VA recruitment, training & onboarding\n• Workflow automation — Zapier, Make.com, n8n\n• AI video & UGC content creation — Freepik/Magnific, CapCut\n• CRM management — HubSpot, Airtable\n• Social media management — Meta Business Suite\n• Healthcare tools — EVV, Worldview (HIPAA-aware)\n• Claude AI app building for business streamlining\n• API & webhook integrations\n• Outbound sales, cold calling & lead qualification" },
+    { k:['automation','zapier','make.com','n8n','workflow','automate','integration','webhook','api','deduplication'],
+      a:"Jhun builds workflow automations with Zapier, Make.com, and n8n — lead capture, follow-up sequences, CRM sync, and data deduplication. He's also developed AI chatbots and an AI Voice Scheduler using n8n, and sets up API/webhook integrations between tools." },
+    { k:['video','ugc','content creation','freepik','magnific','capcut','editing','ai video','videographer','premiere','lightroom','adobe','photoshop'],
+      a:"Jhun creates UGC-style AI videos using Freepik (now Magnific) with prompt engineering, working across multiple AI models depending on the output needed, and finalizes everything in CapCut for platform-ready delivery. He's also been a freelance videographer/video editor since 2019, working with Adobe Lightroom and Premiere Pro." },
+    { k:['crm','hubspot','airtable','pipeline','lead','leads','follow up'],
+      a:"Jhun manages CRMs like HubSpot and Airtable — pipeline and task management, lead capture automations, follow-ups, and data deduplication workflows." },
+    { k:['current','now','present','role','job','position','supervisor','exquisite','client service'],
+      a:"Jhun is currently a Client Service Supervisor at Exquisite Virtual Solutions LLC (remote, since March 2026). He manages client communications across multiple business types, supervises VA teams (admin, social media, medical, real estate), recruits and trains new VAs, runs client meetings via Zoom, operates healthcare tools (EVV, Worldview), manages social accounts via Meta Business Suite, handles live streams on Streamyard, and builds client-facing apps with Claude AI. He's also a freelance Video AI Automation Specialist." },
+    { k:['experience','work experience','work history','history','career','worked','past','previous','employment','resume','cv','years'],
+      a:"Jhun's work experience:\n• Client Service Supervisor — Exquisite Virtual Solutions LLC (Mar 2026–Present)\n• Video AI Automation Specialist — Freelance (Mar 2026–Present)\n• Freelance Automation & CRM Specialist — Self-employed (ongoing)\n• Outbound Cold Caller — Freelance WFH (Nov 2024–Dec 2025)\n• Technical & Sales Rep — Asurion, Techlog Center PH (Jul 2023–Sep 2024)\n• Freelance Videographer/Editor — since Jan 2019\n• Customer Service & Tech Support — Genpact, West, Alorica, Teleperformance (2012–2018)" },
+    { k:['cold call','cold calling','outbound','sales','telemarketing','debt relief','insurance','ssdi','qualification'],
+      a:"Jhun worked as a freelance Outbound Cold Caller (Nov 2024–Dec 2025), making high-volume outbound calls across debt relief, insurance, education, utilities, and SSDI campaigns, tracking leads and managing the pipeline in CRM tools. He also handled upselling and CRM records at Asurion." },
+    { k:['customer service','support','tech support','technical support','asurion','genpact','alorica','teleperformance','bpo','call center'],
+      a:"Jhun has strong customer service roots: Technical & Sales Representative at Asurion (2023–2024), and six years of customer service & technical support at Genpact, West Contact Services, Alorica, and Teleperformance (2012–2018) covering banking and cable internet accounts." },
+    { k:['claude','app','apps','build app','ai app','chatbot','built','projects','portfolio'],
+      a:"Jhun builds client-facing apps using Claude AI to streamline business operations — like the ones featured in the Projects section above: an e-commerce AI support agent, an AI voice receptionist, offline transcription tools, and automation workflows. He's also developed AI chatbots and an AI Voice Scheduler with n8n. (This chatbot you're talking to is one of his builds! 😉)" },
+    { k:['healthcare','evv','worldview','hipaa','medical'],
+      a:"Jhun operates healthcare tools including EVV and Worldview, and works HIPAA-aware — experience gained supervising medical VA services." },
+    { k:['social media','meta','facebook','instagram','streamyard','live stream','broadcast'],
+      a:"Jhun manages social media accounts using Meta Business Suite and handles live stream broadcasts for clients using Streamyard." },
+    { k:['team','manage','management','va ','virtual assistant','recruit','train','onboard','hire va','supervision'],
+      a:"Jhun supervises and supports VA team performance across admin, social media, medical, and real estate services. He handles the full cycle: recruiting, onboarding, and training new virtual assistants, plus client meetings and reporting via Zoom." },
+    { k:['tool','tools','software','google workspace','sheets','docs','slack','twilio','quo','zoom','platforms','stack'],
+      a:"Tools Jhun works with daily: Zapier, Make.com, n8n, HubSpot, Airtable, Meta Business Suite, EVV, Worldview, Zoom, Quo, Slack, Twilio, Streamyard, Google Workspace (Sheets, Docs, Drive, Gmail, Forms), Claude AI, Freepik/Magnific, CapCut, Adobe Photoshop & Premiere, and Lovable + Google AI Studio for websites and funnels." },
+    { k:['website','funnel','lovable','google ai studio','landing page','web design'],
+      a:"Jhun creates websites and funnels using Lovable and Google AI Studio — including a hotel management app and this portfolio's featured builds." },
+    { k:['schedule','meeting','book','appointment','zoom call','google meet','talk','interview','consultation','discovery call','chat with jhun'],
+      a:SCHEDULE },
+    { k:['hire','available','availability','work with','freelance','open to'],
+      a:"Jhun is available for new clients! 🚀 He works remotely from the Philippines. " + SCHEDULE },
+    { k:['thank','thanks','salamat','great','awesome','cool','nice'],
+      a:"You're welcome! 😊 Anything else you'd like to know about Jhun? Or if you'd like to talk to him directly, I can help you set up a Zoom or Google Meet." },
+    { k:['bye','goodbye','see you','later'],
+      a:"Thanks for stopping by! 👋 " + SCHEDULE }
+  ];
+
+  function score(query, keywords){
+    const q = ' ' + query.toLowerCase().replace(/[^a-z0-9. ]/g,' ').replace(/\s+/g,' ') + ' ';
+    let s = 0;
+    for (const kw of keywords){
+      if (q.includes(kw.trim().toLowerCase())) s += kw.trim().split(' ').length * (kw.length > 4 ? 2 : 1);
+    }
+    return s;
+  }
+
+  function answer(query){
+    const norm = query.toLowerCase().replace(/[^a-z0-9. ]/g,' ').replace(/\s+/g,' ').trim();
+    for (const t of KB){
+      if (t.k.some(kw => kw.trim() === norm)) return t.a;
+    }
+    let best = null, bestScore = 0;
+    for (const t of KB){
+      const s = score(query, t.k);
+      if (s > bestScore){ bestScore = s; best = t; }
+    }
+    return bestScore >= 2 ? best.a : SCHEDULE;
+  }
+
+  const panel = document.getElementById('jj-chat-panel');
+  const msgs = document.getElementById('jj-msgs');
+  const input = document.getElementById('jj-input');
+  let greeted = false;
+
+  window.jjToggle = function(){
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')){
+      input.focus();
+      if (!greeted){
+        greeted = true;
+        setTimeout(()=>bot("Hi! 👋 I'm Jhun's AI assistant. Ask me anything about his skills, experience, or how to work with him."), 350);
+      }
+    }
+  };
+  document.getElementById('jj-chat-btn').addEventListener('click', window.jjToggle);
+
+  function add(cls, html){
+    const d = document.createElement('div');
+    d.className = 'jj-msg ' + cls;
+    d.innerHTML = html;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+    return d;
+  }
+  function bot(html){
+    const t = add('bot', '<span class="jj-typing"><span></span><span></span><span></span></span>');
+    setTimeout(()=>{ t.innerHTML = html; msgs.scrollTop = msgs.scrollHeight; }, 500 + Math.random()*400);
+  }
+  window.jjSend = function(text){
+    const q = (text || input.value).trim();
+    if (!q) return;
+    input.value = '';
+    add('user', q.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'));
+    bot(answer(q));
+  };
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') window.jjSend(); });
+
+  const chips = ["What are Jhun's skills?","Work experience","What tools does he use?","Contact info","Book a meeting"];
+  const chipBox = document.getElementById('jj-chips');
+  chips.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'jj-chip';
+    b.textContent = c;
+    b.addEventListener('click', ()=>window.jjSend(c));
+    chipBox.appendChild(b);
+  });
+})();
+</script>
+
 </body>
 </html>
