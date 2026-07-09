@@ -844,8 +844,15 @@
 
 <!-- ===== ASK-JHUN AI CHATBOT ===== -->
 <style>
-  #jj-chat-btn{position:fixed;bottom:24px;right:24px;z-index:9998;width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;font-size:1.6rem;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(59,130,246,.45);transition:transform .2s;}
+  #jj-chat-btn{position:fixed;bottom:24px;right:24px;z-index:9998;width:66px;height:66px;border-radius:50%;border:none;cursor:pointer;padding:0;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(59,130,246,.45);transition:transform .2s;overflow:hidden;animation:jjPulse 3s ease-in-out infinite;}
   #jj-chat-btn:hover{transform:scale(1.08);}
+  #jj-chat-btn video{width:100%;height:100%;object-fit:cover;border-radius:50%;pointer-events:none;display:block;}
+  @keyframes jjPulse{0%,100%{box-shadow:0 8px 30px rgba(59,130,246,.45);}50%{box-shadow:0 8px 38px rgba(139,92,246,.65);}}
+  #jj-bubble{position:fixed;bottom:34px;right:100px;z-index:9998;max-width:200px;background:rgba(13,18,32,.96);color:#e5e7eb;font-size:.82rem;line-height:1.35;padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.1);box-shadow:0 10px 30px rgba(0,0,0,.5);opacity:0;transform:translateY(8px) scale(.95);pointer-events:none;transition:opacity .35s ease,transform .35s ease;}
+  #jj-bubble::after{content:'';position:absolute;right:-6px;bottom:22px;width:12px;height:12px;background:rgba(13,18,32,.96);border-right:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);transform:rotate(-45deg);}
+  #jj-bubble.show{opacity:1;transform:translateY(0) scale(1);animation:jjBounceIn .5s ease;}
+  @keyframes jjBounceIn{0%{transform:translateY(14px) scale(.9);opacity:0;}60%{transform:translateY(-3px) scale(1.03);opacity:1;}100%{transform:translateY(0) scale(1);opacity:1;}}
+  @media (max-width:480px){ #jj-bubble{right:24px;bottom:96px;max-width:min(220px,calc(100vw - 48px));} }
   #jj-chat-panel{position:fixed;bottom:96px;right:24px;z-index:9999;width:min(380px,calc(100vw - 32px));height:min(540px,calc(100vh - 130px));display:none;flex-direction:column;border-radius:20px;overflow:hidden;background:rgba(13,18,32,.96);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.6);}
   #jj-chat-panel.open{display:flex;}
   .jj-head{padding:14px 18px;background:linear-gradient(135deg,rgba(59,130,246,.25),rgba(139,92,246,.25));border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;}
@@ -867,7 +874,10 @@
   @keyframes jjblink{0%,80%,100%{opacity:.25}40%{opacity:1}}
 </style>
 
-<button id="jj-chat-btn" aria-label="Chat about Jhun">💬</button>
+<div id="jj-bubble">Hey, come on! Chat with me 👋</div>
+<button id="jj-chat-btn" aria-label="Chat with Jhun's AI assistant">
+  <video id="jj-avatar-video" muted loop playsinline preload="none" aria-hidden="true"></video>
+</button>
 
 <div id="jj-chat-panel" role="dialog" aria-label="Ask about Jhun chatbot">
   <div class="jj-head">
@@ -938,7 +948,9 @@
     { k:['thank','thanks','salamat','great','awesome','cool','nice'],
       a:"You're welcome! 😊 Anything else you'd like to know about Jhun? Or if you'd like to talk to him directly, I can help you set up a Zoom or Google Meet." },
     { k:['bye','goodbye','see you','later'],
-      a:"Thanks for stopping by! 👋 " + SCHEDULE }
+      a:"Thanks for stopping by! 👋 " + SCHEDULE },
+    { k:['resume link','send resume','resume pdf','download resume','get his resume','copy of resume'],
+      a:"Happy to send it over — email <a href='mailto:" + EMAIL + "?subject=Resume%20Request'>" + EMAIL + "</a> and Jhun will reply with his full resume." }
   ];
 
   function score(query, keywords){
@@ -980,6 +992,33 @@
   };
   document.getElementById('jj-chat-btn').addEventListener('click', window.jjToggle);
 
+  // Avatar video: lazy-load after the page has settled so it never competes with initial paint.
+  const avatarVideo = document.getElementById('jj-avatar-video');
+  function loadAvatar(){
+    if (avatarVideo.src) return;
+    avatarVideo.src = 'assets/avatar-animation.mp4';
+    avatarVideo.play().catch(()=>{ /* autoplay may be blocked until user interacts; that's fine */ });
+  }
+  if ('requestIdleCallback' in window) requestIdleCallback(loadAvatar, { timeout: 2000 });
+  else window.addEventListener('load', () => setTimeout(loadAvatar, 400));
+
+  // Idle greeting bubble: appears a couple seconds after load, auto-dismisses, reappears on hover.
+  const bubble = document.getElementById('jj-bubble');
+  let bubbleTimer;
+  function showBubble(ms){
+    bubble.classList.add('show');
+    clearTimeout(bubbleTimer);
+    bubbleTimer = setTimeout(()=>bubble.classList.remove('show'), ms);
+  }
+  function dismissBubble(){
+    clearTimeout(bubbleTimer);
+    bubble.classList.remove('show');
+  }
+  window.addEventListener('load', () => setTimeout(()=>showBubble(6000), 1800));
+  document.getElementById('jj-chat-btn').addEventListener('mouseenter', () => showBubble(3000));
+  document.getElementById('jj-chat-btn').addEventListener('click', dismissBubble);
+  bubble.addEventListener('click', () => { dismissBubble(); window.jjToggle(); });
+
   function add(cls, html){
     const d = document.createElement('div');
     d.className = 'jj-msg ' + cls;
@@ -1001,7 +1040,7 @@
   };
   input.addEventListener('keydown', e => { if (e.key === 'Enter') window.jjSend(); });
 
-  const chips = ["What are Jhun's skills?","See actual projects","Work experience","Contact info","Book a meeting"];
+  const chips = ["What are Jhun's skills?","See actual projects","Work experience","Contact info","Get his resume","Book a meeting"];
   const chipBox = document.getElementById('jj-chips');
   chips.forEach(c => {
     const b = document.createElement('button');
