@@ -593,7 +593,7 @@
         </a>
       </div>
       <div class="text-center mt-10">
-        <a href="https://drive.google.com/drive/folders/1HNi9CLjEbPhW65dn2zhbIHEM2TNy4m8C" target="_blank" rel="noopener" class="btn-primary" style="font-size:0.95rem;padding:13px 32px;">📁 View All Projects on Google Drive</a>
+        <a href="https://drive.google.com/drive/folders/1veEFo_fsUf9bj2Y2AnoVc6ROWZg6YY5H" target="_blank" rel="noopener" class="btn-primary" style="font-size:0.95rem;padding:13px 32px;">📁 View All Projects on Google Drive</a>
       </div>
     </div>
   </div>
@@ -862,6 +862,8 @@
   .jj-msg.bot{background:rgba(255,255,255,.07);color:#d1d5db;border-bottom-left-radius:4px;align-self:flex-start;}
   .jj-msg.user{background:linear-gradient(135deg,#3b82f6,#6d28d9);color:#fff;border-bottom-right-radius:4px;align-self:flex-end;}
   .jj-msg a{color:#93c5fd;text-decoration:underline;}
+  .jj-msg img{max-width:100%;border-radius:10px;margin-top:8px;border:1px solid rgba(255,255,255,.12);display:block;}
+  .jj-msg .jj-caption{font-size:.72rem;color:#9ca3af;margin-top:4px;font-style:italic;}
   .jj-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;}
   .jj-chip{font-size:.72rem;padding:5px 11px;border-radius:999px;border:1px solid rgba(96,165,250,.4);background:rgba(59,130,246,.12);color:#93c5fd;cursor:pointer;transition:background .15s;}
   .jj-chip:hover{background:rgba(59,130,246,.3);}
@@ -900,57 +902,68 @@
 (function(){
   const EMAIL = 'jhunjosephgtva@gmail.com';
   const SCHEDULE = "To know more about Jhun, let's set a schedule via Zoom or Google Meet! 📅\nEmail <a href='mailto:" + EMAIL + "?subject=Meeting%20with%20Jhun'>" + EMAIL + "</a> to book a time that works for you.";
+  const FALLBACK = "Hmm, that one's outside what I actually know — I only work off Jhun's resume and his project files, no guessing here 🙅. Best move: ask Jhun directly! 📅\nEmail <a href='mailto:" + EMAIL + "?subject=Question%20for%20Jhun'>" + EMAIL + "</a> and he'll fill in the gap.";
 
-  // Knowledge base — source of truth: Jhun's resume.
+  // Knowledge base — source of truth: Jhun's resume + his Drive folder
+  // "Portfolio AI Chatbot - Source of Truth" (docs, certificates, workflow screenshots).
+  // Tone: conversational, a little playful, but every fact below is grounded in
+  // those two sources — nothing here is improvised or guessed.
+  const DRIVE_FOLDER = "https://drive.google.com/drive/folders/1veEFo_fsUf9bj2Y2AnoVc6ROWZg6YY5H";
   const KB = [
     { k:['hi','hello','hey','good morning','good afternoon','good evening','greetings','yo','kumusta'],
-      a:"Hi there! 👋 I'm Jhun's AI assistant. Ask me about his skills, work experience, tools, or how to get in touch — everything I know comes straight from his resume." },
+      a:"Hey, you found me! 👋 I'm Jhun's AI sidekick — think of me as his hype-man who happens to know his whole resume by heart. Ask me about his skills, work history, tools, or how to reach him, and I'll do my best not to bore you." },
     { k:['who is','who are','about jhun','about him','summary','background','introduce','profile','jhun joseph','gonzales'],
-      a:"Jhun Joseph Gonzales is a versatile professional based in Balanga, Bataan, Philippines. He has experience in client services supervision, AI video content creation, workflow automation, CRM management, and virtual assistant operations. He's skilled at managing teams, handling client communications, building automations, and producing AI-driven video content across multiple tools and platforms." },
+      a:"Meet Jhun Joseph Gonzales — a one-man Swiss Army knife based in Balanga, Bataan, Philippines 🇵🇭. Client services supervision by day, AI automation builder by night (okay, also by day). He's spent years managing teams, wrangling client communications, wiring up automations, and producing AI video content — basically if it involves juggling systems and people at once, he's probably done it." },
     { k:['where','location','based','live','from','country','philippines','city','address'],
-      a:"Jhun is based in Balanga, Bataan, Philippines 🇵🇭 and works remotely with clients worldwide." },
+      a:"Jhun's home base is Balanga, Bataan, Philippines 🇵🇭 — but don't let that fool you, he works remotely with clients scattered across the globe. Time zones fear him." },
     { k:['contact','email','phone','number','reach','get in touch','call him','message'],
-      a:"You can reach Jhun at:\n📧 <a href='mailto:" + EMAIL + "'>" + EMAIL + "</a>\n📱 +63 906 048 8844" },
+      a:"Don't be shy, reach out:\n📧 <a href='mailto:" + EMAIL + "'>" + EMAIL + "</a>\n📱 +63 906 048 8844\n\nHe answers faster than you'd expect for someone juggling this many tools 😄" },
     { k:['skill','skills','what can he do','good at','abilities','expertise','strengths','services','offer'],
-      a:"Jhun's core skills include:\n• Client services supervision & VA team management\n• VA recruitment, training & onboarding\n• Workflow automation — Zapier, Make.com, n8n\n• AI video & UGC content creation — Freepik/Magnific, CapCut\n• CRM management — HubSpot, Airtable\n• Social media management — Meta Business Suite\n• Healthcare tools — EVV, Worldview (HIPAA-aware)\n• Claude AI app building for business streamlining\n• API & webhook integrations\n• Outbound sales, cold calling & lead qualification" },
+      a:"Jhun's toolbox, unboxed:\n• Client services supervision & VA team management\n• VA recruitment, training & onboarding\n• Workflow automation — Zapier, Make.com, n8n\n• AI video & UGC content creation — Freepik/Magnific, CapCut\n• CRM management — HubSpot, Airtable\n• Social media management — Meta Business Suite\n• Healthcare tools — EVV, Worldview (HIPAA-aware)\n• Claude AI app building for business streamlining\n• API & webhook integrations\n• Outbound sales, cold calling & lead qualification\n\nBasically, if your business runs on messy spreadsheets and missed follow-ups, he's the fix." },
     { k:['automation','zapier','make.com','n8n','workflow','automate','integration','webhook','api','deduplication'],
-      a:"Jhun builds workflow automations with Zapier, Make.com, and n8n — lead capture, follow-up sequences, CRM sync, and data deduplication. He's also developed AI chatbots and an AI Voice Scheduler using n8n, and sets up API/webhook integrations between tools." },
+      a:"Automation is where Jhun gets genuinely excited. He builds workflows in Zapier, Make.com, and n8n — lead capture, follow-up sequences, CRM sync, and deduplication so your spreadsheet stops looking like a crime scene. He's also built AI chatbots and an AI Voice Scheduler with n8n, plus API/webhook wiring between tools that otherwise refuse to talk to each other." },
     { k:['video','ugc','content creation','freepik','magnific','capcut','editing','ai video','videographer','premiere','lightroom','adobe','photoshop'],
-      a:"Jhun creates UGC-style AI videos using Freepik (now Magnific) with prompt engineering, working across multiple AI models depending on the output needed, and finalizes everything in CapCut for platform-ready delivery. He's also been a freelance videographer/video editor since 2019, working with Adobe Lightroom and Premiere Pro." },
+      a:"On the creative side, Jhun makes UGC-style AI videos using Freepik (now Magnific) with careful prompt engineering — hopping between AI models depending on what the shot needs — then finishes everything in CapCut for platform-ready delivery. He's also been a freelance videographer/editor since 2019 with Adobe Lightroom and Premiere Pro in his back pocket." },
     { k:['crm','hubspot','airtable','pipeline','lead','leads','follow up'],
-      a:"Jhun manages CRMs like HubSpot and Airtable — pipeline and task management, lead capture automations, follow-ups, and data deduplication workflows." },
+      a:"CRMs don't scare him — Jhun manages HubSpot and Airtable daily: pipeline tracking, task management, lead capture automations, timely follow-ups, and deduplication so the same lead doesn't show up five times demanding attention." },
     { k:['current','now','present','role','job','position','supervisor','exquisite','client service'],
-      a:"Jhun is currently a Client Service Supervisor at Exquisite Virtual Solutions LLC (remote, since March 2026). He manages client communications across multiple business types, supervises VA teams (admin, social media, medical, real estate), recruits and trains new VAs, runs client meetings via Zoom, operates healthcare tools (EVV, Worldview), manages social accounts via Meta Business Suite, handles live streams on Streamyard, and builds client-facing apps with Claude AI. He's also a freelance Video AI Automation Specialist." },
+      a:"Right now, Jhun is Client Service Supervisor at Exquisite Virtual Solutions LLC (remote, since March 2026). His day-to-day: managing client comms across multiple business types, supervising VA teams (admin, social media, medical, real estate), recruiting and training new VAs, running client meetings on Zoom, operating healthcare tools (EVV, Worldview), managing socials via Meta Business Suite, handling livestreams on Streamyard, and building client-facing apps with Claude AI. He also freelances as a Video AI Automation Specialist on the side — because apparently one job wasn't enough of a challenge." },
     { k:['experience','work experience','work history','history','career','worked','past','previous','employment','resume','cv','years'],
-      a:"Jhun's work experience:\n• Client Service Supervisor — Exquisite Virtual Solutions LLC (Mar 2026–Present)\n• Video AI Automation Specialist — Freelance (Mar 2026–Present)\n• Freelance Automation & CRM Specialist — Self-employed (ongoing)\n• Outbound Cold Caller — Freelance WFH (Nov 2024–Dec 2025)\n• Technical & Sales Rep — Asurion, Techlog Center PH (Jul 2023–Sep 2024)\n• Freelance Videographer/Editor — since Jan 2019\n• Customer Service & Tech Support — Genpact, West, Alorica, Teleperformance (2012–2018)" },
+      a:"The career highlight reel:\n• Client Service Supervisor — Exquisite Virtual Solutions LLC (Mar 2026–Present)\n• Video AI Automation Specialist — Freelance (Mar 2026–Present)\n• Freelance Automation & CRM Specialist — Self-employed (ongoing)\n• Outbound Cold Caller — Freelance WFH (Nov 2024–Dec 2025)\n• Technical & Sales Rep — Asurion, Techlog Center PH (Jul 2023–Sep 2024)\n• Freelance Videographer/Editor — since Jan 2019\n• Customer Service & Tech Support — Genpact, West, Alorica, Teleperformance (2012–2018)" },
     { k:['cold call','cold calling','outbound','sales','telemarketing','debt relief','insurance','ssdi','qualification'],
-      a:"Jhun worked as a freelance Outbound Cold Caller (Nov 2024–Dec 2025), making high-volume outbound calls across debt relief, insurance, education, utilities, and SSDI campaigns, tracking leads and managing the pipeline in CRM tools. He also handled upselling and CRM records at Asurion." },
+      a:"Jhun spent Nov 2024–Dec 2025 as a freelance Outbound Cold Caller, dialing high volumes across debt relief, insurance, education, utilities, and SSDI campaigns — tracking leads and running the pipeline in CRM tools the whole way. He also handled upselling and CRM records at Asurion, so 'no' has never really scared him." },
     { k:['customer service','support','tech support','technical support','asurion','genpact','alorica','teleperformance','bpo','call center'],
-      a:"Jhun has strong customer service roots: Technical & Sales Representative at Asurion (2023–2024), and six years of customer service & technical support at Genpact, West Contact Services, Alorica, and Teleperformance (2012–2018) covering banking and cable internet accounts." },
+      a:"Customer service is basically his origin story: Technical & Sales Rep at Asurion (2023–2024), plus six years of customer service & tech support at Genpact, West Contact Services, Alorica, and Teleperformance (2012–2018), covering banking and cable internet accounts. He's heard every kind of complaint there is." },
     { k:['claude','app','apps','build app','ai app','chatbot','built','projects','portfolio'],
-      a:"Jhun builds client-facing apps using Claude AI to streamline business operations — like the ones featured in the Projects section above: an e-commerce AI support agent, an AI voice receptionist, offline transcription tools, and automation workflows. He's also developed AI chatbots and an AI Voice Scheduler with n8n. (This chatbot you're talking to is one of his builds! 😉)" },
+      a:"Jhun builds client-facing apps using Claude AI to streamline business operations — like the ones in the Projects section above: an e-commerce AI support agent, an AI voice receptionist, offline transcription tools, and automation workflows. He's also built AI chatbots and an AI Voice Scheduler with n8n (yep, this very chatbot you're chatting with? One of his builds 😉)." },
     { k:['healthcare','evv','worldview','hipaa','medical'],
-      a:"Jhun operates healthcare tools including EVV and Worldview, and works HIPAA-aware — experience gained supervising medical VA services." },
+      a:"On the healthcare side, Jhun operates EVV and Worldview and works HIPAA-aware — picked up while supervising medical VA services, where getting things wrong just isn't an option." },
     { k:['social media','meta','facebook','instagram','streamyard','live stream','broadcast'],
-      a:"Jhun manages social media accounts using Meta Business Suite and handles live stream broadcasts for clients using Streamyard." },
+      a:"Jhun manages social media accounts via Meta Business Suite and runs live stream broadcasts for clients using Streamyard — so the show goes on, technical hiccups or not." },
     { k:['team','manage','management','va ','virtual assistant','recruit','train','onboard','hire va','supervision'],
-      a:"Jhun supervises and supports VA team performance across admin, social media, medical, and real estate services. He handles the full cycle: recruiting, onboarding, and training new virtual assistants, plus client meetings and reporting via Zoom." },
+      a:"Jhun supervises VA team performance across admin, social media, medical, and real estate services — the full cycle: recruiting, onboarding, training, plus client meetings and reporting over Zoom. Basically the person keeping the whole team from turning into chaos." },
     { k:['tool','tools','software','google workspace','sheets','docs','slack','twilio','quo','zoom','platforms','stack'],
-      a:"Tools Jhun works with daily: Zapier, Make.com, n8n, HubSpot, Airtable, Meta Business Suite, EVV, Worldview, Zoom, Quo, Slack, Twilio, Streamyard, Google Workspace (Sheets, Docs, Drive, Gmail, Forms), Claude AI, Freepik/Magnific, CapCut, Adobe Photoshop & Premiere, and Lovable + Google AI Studio for websites and funnels." },
+      a:"Jhun's daily toolkit: Zapier, Make.com, n8n, HubSpot, Airtable, Meta Business Suite, EVV, Worldview, Zoom, Quo, Slack, Twilio, Streamyard, Google Workspace (Sheets, Docs, Drive, Gmail, Forms), Claude AI, Freepik/Magnific, CapCut, Adobe Photoshop & Premiere, and Lovable + Google AI Studio for websites and funnels. Yes, it's a lot — that's kind of the point." },
     { k:['website','funnel','lovable','google ai studio','landing page','web design'],
-      a:"Jhun creates websites and funnels using Lovable and Google AI Studio — including a hotel management app and this portfolio's featured builds." },
+      a:"Jhun builds websites and funnels using Lovable and Google AI Studio — including a hotel management app and the builds featured on this very portfolio." },
+    { k:['facebook chatbot','messenger bot','n8n facebook','fb chatbot','facebook ai chatbot','messenger automation'],
+      a:"Here's a fun one — Jhun built a Facebook Messenger AI chatbot in n8n: a webhook catches incoming Messenger messages, an AI Agent orchestrates the whole conversation using a Gemini chat model, pulls answers from a connected knowledge-base document, keeps conversation memory so it doesn't forget what you just said, and fires replies straight back through the Facebook Graph API. Basically a mini version of what I'm doing right now, except for Messenger.<br><img src='assets/drive-sync/n8n-facebook-chatbot-workflow.jpg' alt='n8n Facebook Messenger AI chatbot workflow diagram'/><div class='jj-caption'>The actual n8n workflow — webhook → AI Agent → Gemini + memory → Messenger reply</div>" },
+    { k:['certificate','certification','certified','prompt engineering certificate','training completed','credentials','course'],
+      a:"Jhun's got the paper to back up the prompt-fu: he completed a full Prompt Engineering training with Technical Virtual Assistants PH on January 15, 2026 — covering prompt fundamentals, anatomy of a good prompt, practical techniques, real-world scenarios, and building full prompt workflows.<br><img src='assets/drive-sync/prompt-engineering-certificate.jpg' alt='Jhun Joseph Gonzales Prompt Engineering completion certificate'/><div class='jj-caption'>Certificate of Completion — Prompt Engineering, Jan 15, 2026</div>" },
     { k:['actual projects','real projects','see his work','see your work','examples','samples','work samples','google drive','drive link','portfolio link','proof','show me','screenshots','upwork'],
-      a:"You can see Jhun's actual client projects — real Zapier automation builds with full descriptions and screenshots — in his Google Drive folder: 📁 <a href='https://drive.google.com/drive/folders/1HNi9CLjEbPhW65dn2zhbIHEM2TNy4m8C' target='_blank' rel='noopener'>View Jhun's Upwork Portfolio Projects</a>\n\nThey're also showcased in the Projects section of this site, including lead qualification routing, lead capture & storage, AI lead scoring with sales alerts, and a CRM intake & follow-up system." },
+      a:"Talk is cheap — here's the receipts 📁. Jhun's actual client automation builds (Zapier lead qualification routing, lead capture & storage, AI-scored lead alerts, and a full CRM intake & follow-up system) are documented with real screenshots in his <a href='" + DRIVE_FOLDER + "' target='_blank' rel='noopener'>Google Drive source folder</a>. Same projects are also showcased right in the Projects section of this site if scrolling beats clicking for you." },
     { k:['schedule','meeting','book','appointment','zoom call','google meet','talk','interview','consultation','discovery call','chat with jhun'],
       a:SCHEDULE },
     { k:['hire','available','availability','work with','freelance','open to'],
-      a:"Jhun is available for new clients! 🚀 He works remotely from the Philippines. " + SCHEDULE },
+      a:"Good news — Jhun's available for new clients! 🚀 He works remotely from the Philippines and yes, he does own a good pair of headphones for the meetings. " + SCHEDULE },
     { k:['thank','thanks','salamat','great','awesome','cool','nice'],
-      a:"You're welcome! 😊 Anything else you'd like to know about Jhun? Or if you'd like to talk to him directly, I can help you set up a Zoom or Google Meet." },
+      a:"Anytime! 😊 Got more questions, or ready to just talk to the human behind the resume? I can help set up a Zoom or Google Meet whenever you're ready." },
     { k:['bye','goodbye','see you','later'],
-      a:"Thanks for stopping by! 👋 " + SCHEDULE },
+      a:"Catch you later! 👋 " + SCHEDULE },
     { k:['resume link','send resume','resume pdf','download resume','get his resume','copy of resume'],
-      a:"Happy to send it over — email <a href='mailto:" + EMAIL + "?subject=Resume%20Request'>" + EMAIL + "</a> and Jhun will reply with his full resume." }
+      a:"Happy to hook you up — email <a href='mailto:" + EMAIL + "?subject=Resume%20Request'>" + EMAIL + "</a> and Jhun will send over his full resume, no forms to fill out." },
+    { k:['are you real','are you human','are you ai','are you a bot','are you jhun','who made you','who built you'],
+      a:"I'm an AI assistant, not Jhun himself (he's off actually doing the work I'm describing). He built me to answer questions from his resume and portfolio so you don't have to wait for a reply — but if you want the real deal, I can help you set up a call with him." }
   ];
 
   function score(query, keywords){
@@ -972,7 +985,7 @@
       const s = score(query, t.k);
       if (s > bestScore){ bestScore = s; best = t; }
     }
-    return bestScore >= 2 ? best.a : SCHEDULE;
+    return bestScore >= 2 ? best.a : FALLBACK;
   }
 
   const panel = document.getElementById('jj-chat-panel');
@@ -986,7 +999,7 @@
       input.focus();
       if (!greeted){
         greeted = true;
-        setTimeout(()=>bot("Hi! 👋 I'm Jhun's AI assistant. Ask me anything about his skills, experience, or how to work with him."), 350);
+        setTimeout(()=>bot("Hey! 👋 I'm Jhun's AI assistant — trained on his resume and his actual project files, so no tall tales here. Ask me about his skills, experience, certifications, or just poke the buttons below 👇"), 350);
       }
     }
   };
@@ -1040,7 +1053,7 @@
   };
   input.addEventListener('keydown', e => { if (e.key === 'Enter') window.jjSend(); });
 
-  const chips = ["What are Jhun's skills?","See actual projects","Work experience","Contact info","Get his resume","Book a meeting"];
+  const chips = ["What are Jhun's skills?","See actual projects","His certifications","Facebook chatbot build","Work experience","Contact info","Book a meeting"];
   const chipBox = document.getElementById('jj-chips');
   chips.forEach(c => {
     const b = document.createElement('button');
